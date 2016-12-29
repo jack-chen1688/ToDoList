@@ -84,6 +84,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="8rJ-Kc-sve" id="CnO-MI-yDx"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="top" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMF-CP-09I">
                                         <rect key="frame" x="156.5" y="110.5" width="30" height="30"/>
