@@ -11,13 +11,26 @@ import UIKit
 class SecondViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
+    var todoList = [String]()
     
-    @IBAction func addToDo(_ sender: Any) {
-        print("hello")
+    @IBAction func add(_ sender: Any) {
+
+        print("hello", todoList.count, todoList)
+        if let todoObj = UserDefaults.standard.object(forKey: "ToDo") {
+            todoList = (todoObj as? Array<String>)!
+        } else {
+            todoList = [String]()
+        }
+        
+        todoList.append(textField.text!)
+        
+        UserDefaults.standard.set(todoList, forKey: "ToDo")
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        todoList.append("hello")
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -29,15 +42,8 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-
-    
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        textField.text = ""
-        return true
-    }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("hello1")
         textField.resignFirstResponder()
         return true
     }
