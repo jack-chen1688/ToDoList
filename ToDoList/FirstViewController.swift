@@ -43,5 +43,38 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.textLabel!.text = todoList[indexPath.row]
         return cell
     }
+    
+    ///If editActonForRowAt is defined, then commit editingStyle below won't be called.
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete") { (action, index) in
+            print("detete pressed")
+            self.todoList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+            UserDefaults.standard.set(self.todoList, forKey: "ToDo")
+
+        }
+        delAction.backgroundColor = UIColor.orange
+        return [delAction]
+    }
+
+    ///Will take effect only when editActionForRowAt above is not used.
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            todoList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            UserDefaults.standard.set(todoList, forKey: "ToDo")
+        }
+    }
+    
+    /// If return true, the row can be edited. Otherwise, the row can not be edited.
+    /// Without this function, rows can be edited by default.
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
+
+ 
 }
 

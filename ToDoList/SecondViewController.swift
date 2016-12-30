@@ -15,7 +15,6 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func add(_ sender: Any) {
 
-        print("hello", todoList.count, todoList)
         if let todoObj = UserDefaults.standard.object(forKey: "ToDo") {
             todoList = (todoObj as? Array<String>)!
         } else {
@@ -23,14 +22,13 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
         }
         
         todoList.append(textField.text!)
-        
         UserDefaults.standard.set(todoList, forKey: "ToDo")
+        textField.text = ""
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        todoList.append("hello")
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -47,5 +45,7 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    
 }
 
